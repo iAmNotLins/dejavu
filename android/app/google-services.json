@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "19823997476",
+    "project_id": "dejavutcc001",
+    "storage_bucket": "dejavutcc001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19823997476:android:1d7bae00e6799d420c1eb1",
+        "android_client_info": {
+          "package_name": "com.dejavu.tcc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19823997476-pckt9rt182it84d7ejbn3n306bhc226k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dejavu.tcc",
+            "certificate_hash": "fd246757bba4da4e25b2b2acea68c8f93ed405c6"
+          }
+        },
+        {
+          "client_id": "19823997476-ccinkm0k5qll1r64ujkbq70qg8v1ju87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe3A5FOqp_D1QKnmBFYfVM59-nWmgpC6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19823997476-ccinkm0k5qll1r64ujkbq70qg8v1ju87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
