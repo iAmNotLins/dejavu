@@ -1,4 +1,5 @@
 import 'package:dejavu/pages/auth_page.dart';
+import 'package:dejavu/pages/screen_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dejavu/firebase_options.dart';
@@ -8,7 +9,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp()); // Remova o const aqui
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +17,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      home: SplashScreen(), // Remova o const aqui também
+      routes: {
+        '/auth': (context) => AuthPage(), // Navegação para AuthPage
+      },
     );
   }
 }
