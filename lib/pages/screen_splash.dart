@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _rotationAnimation;
   late Animation<double> _scaleAnimation;
   late Animation<double> _pulseAnimation;
-  late Animation<double> _fadeAnimation; // Animação de fade
+  late Animation<double> _fadeAnimation;
   bool _showFinalLogo = false;
 
   @override
@@ -79,9 +79,9 @@ class _SplashScreenState extends State<SplashScreen>
             // Alterna entre as animações
             if (_showFinalLogo) {
               return FadeTransition(
-                opacity: _fadeAnimation, // Animação de fade para suavidade
+                opacity: _fadeAnimation,
                 child: Transform.scale(
-                  scale: _pulseAnimation.value, // Animação de "pulso" para DejavuLogo.png
+                  scale: _pulseAnimation.value,
                   child: Image.asset(
                     'lib/images/DejavuLogo.png', // Imagem final sem rotação
                     width: 350,
@@ -91,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen>
               );
             } else {
               return FadeTransition(
-                opacity: _fadeAnimation, // Animação de fade para suavidade
+                opacity: _fadeAnimation,
                 child: Transform.rotate(
                   angle: _rotationAnimation.value * 2.0 * 3.1416, // Rotação completa
                   child: Transform.scale(

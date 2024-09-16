@@ -4,7 +4,6 @@ import 'package:dejavu/pages/home_page.dart';
 import 'package:dejavu/services/auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../components/square_tile.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -30,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
+
     if (passwordController.text != confirmPasswordController.text) {
       Navigator.pop(context);
       showErrorMessage("As senhas não conferem!");
@@ -42,20 +42,23 @@ class _RegisterPageState extends State<RegisterPage> {
           MaterialPageRoute(builder: (context) => HomePage()),
               (route) => false, // Remove todas as rotas anteriores
         );
-      } on FirebaseAuthException {
-        showErrorMessage('E-mail ou senha incorretos, tente novamente!');
+      } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
+        showErrorMessage(e.message ?? 'Erro desconhecido');
       }
     }
   }
 
-  void signInWithGoogle() {
-    AuthService().signInWithGoogle(onSuccess: () {
+  void signInWithGoogle() async {
+    try {
+      await AuthService().signInWithGoogle();
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => HomePage()),
             (route) => false, // Remove todas as rotas anteriores
       );
-    });
+    } catch (e) {
+      showErrorMessage('Falha na autenticação com Google');
+    }
   }
 
   void showErrorMessage(String message) {
@@ -83,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
                 Image.asset(
@@ -123,6 +126,24 @@ class _RegisterPageState extends State<RegisterPage> {
                   onTap: signUserUp,
                 ),
                 const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Já tem uma conta?'),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        'Faça login agora',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -135,53 +156,30 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text('Ou continue com',
-                            style: TextStyle(color: Colors.grey[700])),
+                        child: Text(
+                          'Ou entre com',
+                          style: TextStyle(color: Colors.grey[700]),
+                        ),
                       ),
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
                           color: Colors.grey[400],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SquareTile(
-                          onTap: signInWithGoogle,
-                          imagePath: 'lib/images/google.png'),
-                      const SizedBox(
-                        width: 10,
-                      )
-                    ],
-                  ),
-                ),
+                const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Já tem uma conta?',
-                      style: TextStyle(color: Colors.grey[700]),
+                    SquareTile(
+                      imagePath: 'lib/images/google.png',
+                      onTap: signInWithGoogle,
                     ),
-                    const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop(); // Voltar para a tela de login
-                      },
-                      child: const Text(
-                        'Faça login agora',
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ),
-                    )
                   ],
-                )
+                ),
               ],
             ),
           ),

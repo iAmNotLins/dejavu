@@ -1,12 +1,11 @@
 import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<void> signInWithGoogle({VoidCallback? onSuccess}) async {
+  Future<void> signInWithGoogle({VoidCallback? onSuccess, Function(String)? onError}) async {
     try {
       // Desconectar o usuário atual do Google Sign-In
       await _googleSignIn.signOut();
@@ -33,6 +32,9 @@ class AuthService {
       }
     } catch (e) {
       print('Erro ao autenticar com o Google: $e');
+      if (onError != null) {
+        onError('Erro ao autenticar com o Google. Tente novamente.');
+      }
     }
   }
 }

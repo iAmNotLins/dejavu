@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Center(child: Text("LOGGED IN AS ${user.email!}",
-      style: const TextStyle(fontSize: 20),)),
+      style: const TextStyle(fontSize: 16),)),
     );
   }
 }

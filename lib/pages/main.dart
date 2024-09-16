@@ -9,19 +9,17 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp()); // Remova o const aqui
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(), // Remova o const aqui também
+      home: SplashScreen(), // Tela inicial
       routes: {
-        '/auth': (context) => AuthPage(), // Navegação para AuthPage
+        '/auth': (context) => AuthPage(), // Rota para a tela de autenticação
       },
     );
   }
